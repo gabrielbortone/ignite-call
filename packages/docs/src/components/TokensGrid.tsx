@@ -24,7 +24,7 @@ export function TokensGrid({ tokens, hasRemValue = false} : TokensGridProps){
                             {hasRemValue && (
                 <td>{Number(value.replace('rem', '')) * 16}px</td>
               )}
-                        </tr>
+                        </tr> 
                     )
                 })}
             </tbody>
