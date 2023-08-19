@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.25.0",
+    "@storybook/cli": "^7.3.2",
     "turbo": "^1.5.5"
   }
 }

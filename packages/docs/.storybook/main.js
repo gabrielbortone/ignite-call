@@ -1,26 +1,40 @@
+import { dirname, join } from "path";
 module.exports = {
   "stories": [
     "../src/pages/**/*.stories.mdx",
     "../src/stories/**/*.stories.tsx"
   ],
+
   "addons": [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-interactions",
-    "@storybook/addon-a11y"
+    getAbsolutePath("@storybook/addon-links"),
+    getAbsolutePath("@storybook/addon-essentials"),
+    getAbsolutePath("@storybook/addon-interactions"),
+    getAbsolutePath("@storybook/addon-a11y"),
+    getAbsolutePath("@storybook/addon-mdx-gfm")
   ],
-  "framework": "@storybook/react",
-  "core": {
-    "builder": "@storybook/builder-vite"
+
+  "framework": {
+    name: getAbsolutePath("@storybook/react-vite"),
+    options: {}
   },
+
   "features": {
     "storyStoreV7": true
   },
+
   viteFinal: (config, { configType }) => {
     if (configType === 'PRODUCTION') {
       config.base = '/05-design-system/'
     }
 
     return config
+  },
+
+  docs: {
+    autodocs: true
   }
+}
+
+function getAbsolutePath(value) {
+  return dirname(require.resolve(join(value, "package.json")));
 }
