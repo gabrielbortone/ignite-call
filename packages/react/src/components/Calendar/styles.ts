@@ -2,7 +2,7 @@ import { styled } from '../../styles'
 
 export const CalendarContainer = styled('div', {
     display: 'flex',
-    background: '$gray600',
+    background: '$gray800',
     color: '$white',
     fontFamily: 'Roboto',
     fontSize: '$md',
@@ -10,7 +10,7 @@ export const CalendarContainer = styled('div', {
     lineHeight: '26px',
     letterSpacing: '0em',
     width: '33.75rem',
-    height: '27.5rem',
+    height: '30rem',
     flexDirection: 'column'
 });
 
@@ -38,13 +38,14 @@ export const CalendarHeaderYearSpan = styled('span', {
 })
 
 export const CalendarHeaderNavContainer = styled('div', {
-    
+    display: 'flex',
+    gap: '0.8rem'
 })
 
 export const CalendarContent = styled('section', {
     display: 'grid',
     gap: '0.5rem',
-    rowGap: '1rem',
+    rowGap: '0.5rem',
     gridTemplateColumns: 'repeat(7, 1fr)',
     padding: '1.5rem',
     alignItems: 'center'
@@ -55,7 +56,8 @@ export const CalendarContentTitleItem = styled('span', {
     fontFamily: 'Roboto',
     alignItems: 'center',
     justifyContent: 'center',
-    display: 'flex'
+    display: 'flex',
+    color: '$gray200',
 });
 
 export const CalendarContentItem = styled('span', {
@@ -66,3 +68,8 @@ export const CalendarContentItem = styled('span', {
     display: 'flex',
     paddig: '1rem',
 });
+
+export const ButtonChangeMonth = styled('a',{
+    padding: '0.4rem 0',
+    cursor: 'pointer'
+})

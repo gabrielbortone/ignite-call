@@ -1,7 +1,7 @@
 import { CaretLeft, CaretRight } from "phosphor-react";
 import { CalendarContainer, CalendarHeader, 
     CalendarHeaderNavContainer, CalendarContent,
-    CalendarContentItem, CalendarContentTitleItem, CalendarHeaderDiv, CalendarHeaderYearSpan } from "./styles";
+    CalendarContentItem, CalendarContentTitleItem, CalendarHeaderDiv, CalendarHeaderYearSpan, ButtonChangeMonth } from "./styles";
 import { useEffect, useState } from "react";
 import CalendarItemDay from "../CalendarItemDay";
 
@@ -26,6 +26,7 @@ export function Calendar({month, year} : CalendarProps){
     const [currentMonth, setCurrentMonth ] = useState<number>(month-1);
     const [ currentYear, setCurrentYear] = useState<number>(year);
     const [spaces, setSpaces] = useState<number[]>([]);
+    const [ daysNotAvailable, setdaysNotAvailable] = useState<CalendarDay[]>([]);
 
     useEffect(()=> {
         const daysList : CalendarDay[] = [];
@@ -56,21 +57,43 @@ export function Calendar({month, year} : CalendarProps){
     }, [days])
     
 
+    function increaseMonth(){
+        if(currentMonth < 11){
+            setCurrentMonth((state)=> state + 1);
+        }
+        else{
+            setCurrentMonth(0);
+            setCurrentYear((state)=> state + 1);
+        }
+    }
+
+    function decreaseMonth(){
+        if(currentMonth === 0){
+            setCurrentMonth(11);
+            setCurrentYear((state)=> state - 1);
+        }
+        else{
+            setCurrentMonth((state)=> state -1);
+        }
+
+    }
+
+
 
      return (
         <CalendarContainer>
             <CalendarHeader>
                 <CalendarHeaderDiv>
                     <span>{monthNames[currentMonth]}</span>
-                    <CalendarHeaderYearSpan>{year}</CalendarHeaderYearSpan>
+                    <CalendarHeaderYearSpan>{currentYear}</CalendarHeaderYearSpan>
                 </CalendarHeaderDiv>
                 <CalendarHeaderNavContainer>
-                    <a href="#">
+                    <ButtonChangeMonth onClick={decreaseMonth}>
                         <CaretLeft size={24} color="#A9A9B2"/>
-                    </a>
-                    <a href="#">
+                    </ButtonChangeMonth>
+                    <ButtonChangeMonth onClick={increaseMonth}>
                         <CaretRight size={24} color="#A9A9B2"/>
-                    </a>
+                    </ButtonChangeMonth>
                 </CalendarHeaderNavContainer>
             </CalendarHeader>
             <CalendarContent>
@@ -84,6 +107,8 @@ export function Calendar({month, year} : CalendarProps){
                 }
                 {
                     days.map((d) => <CalendarItemDay key={d.day} 
+                    available={daysNotAvailable.find(dna=> dna.day == d.day && dna.month == d.month 
+                        && dna.year == d.year) === undefined} 
                     month={currentMonth} year={currentYear}
                     dayOfWeekend={d.dayOfWeekend} day={d.day} />)
                 }
