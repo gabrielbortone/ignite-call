@@ -22,7 +22,8 @@ export const TooltipContainer = styled('div', {
 export const TooltipText = styled('p', {
     color: '$gray100',
     fontFamily: '$code',
-    fontSize: '$md'
+    fontSize: '$md',
+    textAlign: 'center'
 })
 
 export const TrianguleTooltip = styled('div', {
